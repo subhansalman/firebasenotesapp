@@ -9,20 +9,20 @@ const userbirthdate= document.querySelector("#date")
 const signupHandler= async ()=>{
     try {
         if(!email || !password || !userName || !userPhone || !userbirthdate){
-            alert("Enter All The Required Fields")
+            alert("Enter all the fields")
             return
         }
-        const userRegiter= await createUserWithEmailAndPassword(auth, email.value, password.value)
-        console.log("user",userRegiter.user)
-        await setDoc(doc(db,"users",userRegiter.user.uid),{
-            userEmail:email.value,
+        const response= await createUserWithEmailAndPassword(auth,email.value,password.value)
+        console.log("response",response.user)
+        await setDoc(doc(db,"user",response.user.uid),{
             fullName:userName.value,
+            userEmail:email.value,
             phoneNumber:userPhone.value,
-            birthDay:userbirthdate.value
+            birthday:userbirthdate.value
         })
-        alert("User Succefully Signed Up")
+        alert("You Sign up Succeccfully")
         window.location.href="./index.html"
-    } catch (error) {
+        } catch (error) {
         console.log("error",error.message)
     }
 }
