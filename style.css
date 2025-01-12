@@ -9,8 +9,10 @@ body{
     background-size: cover;
     background-repeat: no-repeat;
     height: 100vh;
+    display: flex;
+    align-items: center;
 }
-.formbody{
+.loginbody{
     width: 40%;
     margin: 10px auto;
     padding: 20px;
