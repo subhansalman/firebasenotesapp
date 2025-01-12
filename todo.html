@@ -7,7 +7,18 @@
     <link rel="stylesheet" href="todo.css">
     <title>TODO App</title>
 </head>
-<body>
+<body onload="fetchData()">
+
+    <h1 class="text-center mt-5">TODO WITH FIREBASE DATABASE...</h1>
+
+    <div class="container mt-5">
+        <input type="text" placeholder="Enter Todo" class="form-control" id="input-value">
+        <button type="button" class="btn btn-success">Add Notes</button>
+    </div>
+
+    <div class="container mt-4" id="parent">
+
+    </div>
     
 </body>
 <script type="module" src="todo.js"></script>
