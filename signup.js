@@ -1,28 +1,30 @@
-import{ addDoc, auth, collection, createUserWithEmailAndPassword, db, setDoc} from "./firebase.js"
+import{ auth, createUserWithEmailAndPassword, db, setDoc,doc} from "./firebase.js"
 
 const email=document.querySelector("#email-signup")
 const password= document.querySelector("#email-password")
 const userName= document.querySelector("#username")
-const userPhone= document.querySelector("#phone")
+const userPhone= document.querySelector("#Phone")
 const userbirthdate= document.querySelector("#date") 
 
-const adduserData= async ()=>{
+const signupHandler= async ()=>{
     try {
-        if(!email&&!password&&userName&&userPhone){
-            alert("Fill the required fields")
+        if(!email || !password || !userName || !userPhone || !userbirthdate){
+            alert("Enter All The Required Fields")
             return
         }
-        const userRegister= await createUserWithEmailAndPassword(auth, email.value, password.value)
-        console.log(userRegister.user)
-        await setDoc(doc(db,"users",userRegister.uid),{
-            useremail:email,
-            fullName:userName,
-            phoneNumber:userPhone,
-            birthDay:userbirthdate
+        const userRegiter= await createUserWithEmailAndPassword(auth, email.value, password.value)
+        console.log("user",userRegiter.user)
+        await setDoc(doc(db,"users",userRegiter.user.uid),{
+            userEmail:email.value,
+            fullName:userName.value,
+            phoneNumber:userPhone.value,
+            birthDay:userbirthdate.value
         })
-        console.log("userData",userRegister)
+        alert("User Succefully Signed Up")
         window.location.href="./index.html"
     } catch (error) {
-        console.log("erroe",error.message)
+        console.log("error",error.message)
     }
 }
+
+window.signupHandler=signupHandler
