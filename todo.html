@@ -8,15 +8,20 @@
     <title>TODO App</title>
 </head>
 <body onload="fetchData()">
+    <div class="container todo my-5 py-5">
 
-    <h1 class="text-center mt-5">TODO WITH FIREBASE DATABASE...</h1>
-
-    <div class="container mt-5">
-        <input type="text" placeholder="Enter Todo" class="form-control" id="input-value">
-        <button type="button" class="btn btn-success">Add Notes</button>
+        <h1 class="text-center">TODO WITH FIREBASE DATABASE...</h1>
+        
+        <div class="input">
+            <input type="text" placeholder="Enter Todo" class="form-control" id="inputvalue">
+            <button type="button" class="btn btn-success" onclick="addData()">Add Notes</button>
+        </div>
     </div>
 
-    <div class="container mt-4" id="parent">
+    <div class="container mt-4">
+        <div class="row" id="parent">
+
+        </div>
 
     </div>
     

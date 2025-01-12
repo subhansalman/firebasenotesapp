@@ -1,21 +1,22 @@
 import {app, collection, addDoc, getDocs, doc, updateDoc, db} from "./firebase.js"
-
-const inputNotes=document.querySelector("#input-notes");
+console.log(app)
+const inputNotes=document.querySelector("#inputvalue");
 const parentNotes=document.querySelector("#parent");
 
-const addTodo= async()=>{
+const addData= async ()=>{
     try {
         if(!inputNotes.value){
-            alert("Enter A task")
+            alert("Ener Valid Notes")
             return
         }
-        const todoObj ={
+        const todoObj={
             todo:inputNotes.value
         }
-
-        const response = await addDoc(collection(db,"userTodos"),todoObj)
+        const response= await addDoc(collection(db,"userNotes"),todoObj)
         console.log("response",response)
+        inputNotes.value="";
         fetchData()
+
     } catch (error) {
         console.log("error",error.message)
     }
@@ -23,40 +24,42 @@ const addTodo= async()=>{
 
 const fetchData= async ()=>{
     try {
-        const tempArr = []
-
-        const gettingQuery= await getDocs(collection(db,"userTodos"))
-        parentNotes.innerHTML=""
-        gettingQuery.forEach= (doc)=>{
-            console.log(doc.data())
-
-            parentNotes.innerHTML=`<div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">${doc.data().todo}</h5>
-                <button type="button" class="btn btn-success" id=${doc.id}>Edit</button>
-                <button type="button" class="btn btn-danger">Delete</button>
-            </div>
-            </div>`
-        }
+       const gettingQuery= await getDocs(collection(db,"userNotes"))
+    parentNotes.innerHTML="";
+    gettingQuery.forEach((doc)=>{
+        console.log(doc.data())
+parentNotes.innerHTML += `<div class="col-sm-6 col-md-4 col-lg-3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">${doc.data().todo}</h5>
+        <button class="btn btn-success" onclick="updateNotes(this)" id="${doc.id}">Edit Notes</button>
+      </div>
+    </div>
+  </div>`
+    })
     } catch (error) {
         console.log("error",error.message)
     }
 }
-const updateNotes = async(ele)=>{
+
+const updateNotes= async(ele)=>{
     try {
-        console.log(ele.id)
-        const editNote=inputNotes.value
-        console.log("editNote",editNote)
-        if(!editNote){
-            alert("Enter the editted value")
+        console.log("User Edit",ele.id)
+        const editNotes=prompt("Enter Your Editted value")
+        if(!editNotes){
+            alert("Enter the edtted Value")
             return
         }
-        await updateDoc(doc(db,"userTodos",ele.id),{
-            todo:editNote
+        await updateDoc(doc(db,"userNotes",ele.id),{
+            todo:editNotes
         })
-        fetchData()
     } catch (error) {
-        
+        console.log("error",error.message)
     }
 }
 
+
+
+window.addData=addData
+window.fetchData = fetchData
+window.updateNotes=updateNotes
