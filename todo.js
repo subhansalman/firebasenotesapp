@@ -1,6 +1,6 @@
 const authCheck=()=>{
     const userUID= localStorage.getItem("uid")
-    if(userUID){
+    if(!userUID){
         window.location.replace("./index.html")
     }
 }
