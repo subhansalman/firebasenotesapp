@@ -9,19 +9,23 @@ const userbirthdate= document.querySelector("#date")
 const signupHandler= async ()=>{
     try {
         if(!email || !password || !userName || !userPhone || !userbirthdate){
-            alert("Enter all the fields")
+            alert("Fill all the required files")
             return
         }
-        const response= await createUserWithEmailAndPassword(auth,email.value,password.value)
+        
+        const response= await createUserWithEmailAndPassword(auth, email.value, password.value)
         console.log("response",response.user)
-        await setDoc(doc(db,"user",response.user.uid),{
+
+
+        await setDoc(doc(db,"users",response.user.uid),{
             fullName:userName.value,
-            userEmail:email.value,
-            phoneNumber:userPhone.value,
-            birthday:userbirthdate.value
+            phoneNumber: userPhone,
+            birthDay: userbirthdate,
+            userEmail: email.value
         })
-        alert("You Sign up Succeccfully")
-        window.location.href="./index.html"
+
+        window.location.replace("./index.html")
+
         } catch (error) {
         console.log("error",error.message)
     }
