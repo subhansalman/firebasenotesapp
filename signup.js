@@ -19,8 +19,8 @@ const signupHandler= async ()=>{
 
         await setDoc(doc(db,"users",response.user.uid),{
             fullName:userName.value,
-            phoneNumber: userPhone,
-            birthDay: userbirthdate,
+            phoneNumber: userPhone.value,
+            birthDay: userbirthdate.value,
             userEmail: email.value
         })
 
