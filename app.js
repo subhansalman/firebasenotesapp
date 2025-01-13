@@ -1,24 +1,23 @@
 const authCheck=()=>{
-    const userUID= localStorage.getItem("uid")
+    const userUID=localStorage.getItem("uid")
     if(userUID){
         window.location.replace("./todo.html")
     }
 }
-
-import {auth,signInWithEmailAndPassword} from "./firebase.js"
-
+import{ auth, signInWithEmailAndPassword } from "./firebase.js"
 const email=document.querySelector("#email-signup")
-const password= document.querySelector("#email-password")
+const password=document.querySelector("#email-password")
 
 const loginHandler= async()=>{
     try {
-        const response= await signInWithEmailAndPassword(auth, email.value, password.value)
-        const uid=response.user.uid
-        localStorage.setItem("uid",uid)
 
-        console.log("uid",uid)
-        window.location.replace("./todo.html")
+     const response= await signInWithEmailAndPassword(auth, email.value, password.value)
+     const uid=response.user.uid
+     console.log("uid",uid)
+     localStorage.setItem("uid",uid)
 
+     alert("User Successfully logged in")
+     window.location.replace("./todo.html")
 
     } catch (error) {
         console.log("error",error.message)
