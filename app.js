@@ -5,7 +5,7 @@ const authCheck=()=>{
     }
 }
 
-import {auth,signInWithEmailAndPassword} from "./firebase.jd"
+import {auth,signInWithEmailAndPassword} from "./firebase.js"
 
 const email=document.querySelector("#email-signup")
 const password= document.querySelector("#email-password")
@@ -17,7 +17,7 @@ const loginHandler= async()=>{
         localStorage.setItem("uid",uid)
 
         console.log("uid",uid)
-        window.location.replace("./todo.js")
+        window.location.replace("./todo.html")
 
 
     } catch (error) {
@@ -25,6 +25,5 @@ const loginHandler= async()=>{
         alert("error",error.code)
     }
 }
-
-window.loginHandler=loginHandler
 window.authCheck=authCheck
+window.loginHandler=loginHandler
